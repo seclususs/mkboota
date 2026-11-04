@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=68.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mkboota"
+version = "1.0.0"
+description = "Android Boot Animation Tool"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12"
+authors = [
+    { name = "seclususs" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Multimedia :: Video",
+]
+dependencies = [
+    "pillow>=10.2.0",
+    "PySide6>=6.6.0",
+    "rich>=13.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/seclususs/mkboota"
+Repository = "https://github.com/seclususs/mkboota"
+"Bug Tracker" = "https://github.com/seclususs/mkboota/issues"
+
+[project.scripts]
+mkboota = "cli.main:main"
+mkboota-gui = "gui.app:main"
+
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.8.0",
+    "ruff>=0.3.0",
+    "build>=1.0.0",
+    "setuptools>=68.0.0",
+    "wheel",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["mkboota*", "cli*", "gui*"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "BLE"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/cli/**" = ["E402", "BLE001"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+mypy_path = ["src"]
